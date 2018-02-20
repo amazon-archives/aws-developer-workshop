@@ -53,64 +53,55 @@ In this hands-on lab, we are going to start with a Hello World node.js serverles
 1. Sign into the AWS Management Console [https://console.aws.amazon.com/](https://console.aws.amazon.com/).
 
 **Note:** For this lab you will need to use an IAM user and not a federated user account. The account will require _AWSCodeStarFullAccess_ managed policy. Alternatively, you can create projects if you have an IAM administrative user with full permissions for all AWS Services (_AdministratorAccess_ managed policy). For more information, see [Setting up AWS Code Star (Step 3: Create or Use an IAM User).](https://docs.aws.amazon.com/codestar/latest/userguide/setting-up.html#setting-up-create-iam-user)
+
 2. In the upper-right corner of the AWS Management Console, confirm you are in the desired AWS region (e.g., N. Virginia).
 3. Click on **AWS CodeStar** from the list of all services.
 4. Click on **Start a project**.
 5. If this is the first time you use the service, you will be prompted to create the required service roles for AWS Code \* services. Select **Yes, create role**.
 
-1. Choose a project template:
+6. Choose a project template:
 Under _Application Category_ select _Web Application._
 Under _Programming Languages_ select _Node.js._
 Pick _Node.JS Web Application AWS Lambda (running serverless)._
 
  
 
-1. Enter the project details:
+7. Enter the project details:
 Project name: _serverless-lab._
 Which repository do you want to use? _AWS CodeCommit._
 Click **Next**.
 
  
 
-1. Leave everything as the default and click on **Create Project**. If this is the first time you use the service, you will also be prompted to enter your display name and email.
-2. We are going to use AWS Cloud9 as our IDE. Select AWS Cloud9 and hit **Next.**
-3. For our instance, we will select _t2.small_. We will leave the networking settings as default which will launch the instance in our default VPC in a public subnet. Under _Cost-saving_ settings, observe that the environment will be automatically shut down after 30 minutes. Click **Next**.
-4. AWS CodeStar is now provisioning all the AWS Code \* services. This process may take around 3-5 minutes.
+8. Leave everything as the default and click on **Create Project**. If this is the first time you use the service, you will also be prompted to enter your display name and email.
+9. We are going to use AWS Cloud9 as our IDE. Select AWS Cloud9 and hit **Next.**
+
+10. For our instance, we will select _t2.small_. We will leave the networking settings as default which will launch the instance in our default VPC in a public subnet. Under _Cost-saving_ settings, observe that the environment will be automatically shut down after 30 minutes. Click **Next**.
+
+11. AWS CodeStar is now provisioning all the AWS Code \* services. This process may take around 3-5 minutes.
 
  
 
-1. While you wait, open up a new browser tab and go to the [IAM Roles console](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles) (listed under Services). Search for _&#39;code&#39;_ and notice that AWS CodeStar created new IAM Roles for each of the AWS service we are going to use.
+12. While you wait, open up a new browser tab and go to the [IAM Roles console](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles) (listed under Services). Search for 'code' and notice that AWS CodeStar created new IAM Roles for each of the AWS service we are going to use.
 
  
 
-1.
 13.Head back to the _AWS CodeStar Dashboard_ and scroll to the _Application endpoints_ panel.
 
  
-2. Click on the endpoint URL. You should see a &quot;Hello World&quot; web page rendered by Node.js. Congratulations! You successfully configured an end-to-end development and continuous deployment pipeline on AWS.
+14. Click on the endpoint URL. You should see a &quot;Hello World&quot; web page rendered by Node.js. Congratulations! You successfully configured an end-to-end development and continuous deployment pipeline on AWS.
 
 <a name="cloud9"></a>
 # Writing your first AWS Lambda Function on AWS Cloud9
 
-1. Go back to the AWS CodeStar dashboard, and click on **IDE** on the left pane.
+15. Go back to the AWS CodeStar dashboard, and click on **IDE** on the left pane.
 Click **Open IDE.**
 
  
 
-| **Note:**
- 
 
 
- |
-
-You use the AWS Cloud9 IDE, running in a web browser on your local computer, to interact with your environment. An Amazon EC2 instance or your own server connects to the environment. An environment is a place where you store your project&#39;s files and where you run the tools to develop your apps.You use the AWS Cloud9 IDE to work with files in the environment. You can:
-- Store these files locally on the instance or server.
-- Clone a remote code repository—such as a repo in AWS CodeCommit—into your environment.
-- Work with a combination of local and cloned files in the environment.
- |
-| --- | --- |
-
-1. Upon first login, AWS Cloud9 automatically clone a starter project &quot;locally&quot; into our development instance. You should see something like this:
+16. Upon first login, AWS Cloud9 automatically clone a starter project "locally" into our development instance. You should see something like this:
 
 
 ```
@@ -128,7 +119,7 @@ user:~/environment $
 
 ```
 
-1. We&#39;re going to create a new API microservice in this project. Perform the following command in the terminal window at the bottom (labeled as _bash – &quot;ip-xx-xx-xx-xx&quot;):_
+17. We are going to create a new API microservice in this project. Perform the following command in the terminal window at the bottom (labeled as _bash – &quot;ip-xx-xx-xx-xx&quot;):_
 
 ```
 cd serverless-lab
@@ -143,10 +134,9 @@ rm addservice-01.tar.gz
 
 The commands above will add the following files to your local AWS Cloud9 environment:
 
-1.
-  1. js – our addition-as-a-service lambda function
-  2. test/event.numbers.json – the test payload
-  3. .gitignore – instruction for git to ignore temp files
+  a. js – our addition-as-a-service lambda function
+  b. test/event.numbers.json – the test payload
+  c. .gitignore – instruction for git to ignore temp files
 
 To confirm we have all the files in place, perform ls in the terminal window and you should see the following files:
 
@@ -163,7 +153,7 @@ To confirm we have all the files in place, perform ls in the terminal window and
  |
 | --- | --- |
 
-1. We will need to update our SAM template (_template.yml_) to register our new function.
+18. We will need to update our SAM template (_template.yml_) to register our new function.
 Incorporate these \*\ ***requirements\*\*** by modifying the template.yml file:
 
 1. Function name: &quot;AddService&quot;
