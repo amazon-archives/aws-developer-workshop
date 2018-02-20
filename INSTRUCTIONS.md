@@ -86,7 +86,7 @@ Click **Next**.
 
  
 
-13.Head back to the _AWS CodeStar Dashboard_ and scroll to the _Application endpoints_ panel.
+13. Head back to the _AWS CodeStar Dashboard_ and scroll to the _Application endpoints_ panel.
 
  
 14. Click on the endpoint URL. You should see a &quot;Hello World&quot; web page rendered by Node.js. Congratulations! You successfully configured an end-to-end development and continuous deployment pipeline on AWS.
@@ -132,26 +132,23 @@ rm addservice-01.tar.gz
 
  
 
-The commands above will add the following files to your local AWS Cloud9 environment:
+The commands above will add the following files to your local AWS Cloud9 environment: 
 
-  a. js – our addition-as-a-service lambda function
-  b. test/event.numbers.json – the test payload
-  c. .gitignore – instruction for git to ignore temp files
-
+a.	add.js - our addition-as-a-service lambda function
+b.	test/event.numbers.json - the test payload
+c.	.gitignore - instruction for git to ignore temp files
+ 
 To confirm we have all the files in place, perform ls in the terminal window and you should see the following files:
 
-|
-- js
-- yml
-- js
-- \nothing
- |
-- \public
-- md
-- yml
-- \test
- |
-| --- | --- |
+*	add.js
+*	buildspec.yml
+*	index.js
+*	\nothing	
+* \public
+*	README.md
+*	template.yml
+*	\test
+
 
 18. We will need to update our SAM template (_template.yml_) to register our new function.
 Incorporate these \*\ ***requirements\*\*** by modifying the template.yml file:
@@ -182,7 +179,7 @@ AddService:
           Method: any
 ```
 
-1. After you are done making those changes. Let&#39;s test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
+19. After you are done making those changes. Let&#39;s test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
 /home/ec2-user/environment/serverless-lab/ and perform the following:
 
 ```
@@ -193,11 +190,11 @@ Our add.js currently do not implement the functionality we are seeking. We are e
 
 **Note:** The first time you execute a function, SAM LOCAL will fetch the appropriate Docker image for the function as defined in our template.yml. Once that is done, SAM LOCAL will invoke theLambda function we just wrote, showed the response, _Duration_ and the _Max Memory Used_ metric which is useful for tuning our AWS Lambda function configuration.
 
-1. Open up _add.js_ and implement our add function in line 12-16.
+20. Open up _add.js_ and implement our add function in line 12-16.
 
  
 
-1. You think you got it right? Let&#39;s test out the Lambda function locally again:
+21. You think you got it right? Let's test out the Lambda function locally again:
 
 ```
 sam local invoke "AddService" -e test/event.numbers.json
@@ -213,19 +210,19 @@ should return the following:
 }
 ```
 
-1. Congratulations! You have implemented add()as an AWS Lambda function.
+22. Congratulations! You have implemented add()as an AWS Lambda function.
 
 <a name="sam"></a>
 # Deploying Your Function using AWS SAM and AWS CodeDeploy
 
-1. We will now configure our git user in the AWS Cloud9 environment so we can commit our changes to the code repository
+23. We will now configure our git user in the AWS Cloud9 environment so we can commit our changes to the code repository
 
 ```
 git config --global user.email you@example.com
 git config --global user.name "Your Name"
 ```
 
-2. We are going to add all our pending changes, commit it to Git and push it to our AWS CodeCommit Repository:
+24. We are going to add all our pending changes, commit it to Git and push it to our AWS CodeCommit Repository:
 
 ```
 git add -A
@@ -235,7 +232,7 @@ git push origin master
 ```
 
 
-1. By default, AWS CodeStar configured AWS CodeBuild to deploy on every code commits. Go back to your AWS CodeStar serverless-lab dashboard. You can see the status of the current build, or see more details about the build by selecting **Build** from the left hand pane. You will notice that a build is currently taking place. This will take around 2 minutes.
+25. By default, AWS CodeStar configured AWS CodeBuild to deploy on every code commits. Go back to your AWS CodeStar serverless-lab dashboard. You can see the status of the current build, or see more details about the build by selecting **Build** from the left hand pane. You will notice that a build is currently taking place. This will take around 2 minutes.
 
  
 
@@ -268,20 +265,21 @@ aws cloudformation deploy \
 <a name="debugging"></a>
 # Debugging and Monitoring your function
 
-1. After a successful deployment, open the AWS CodeStar project dashboard and copy our _Application endpoints_ location.
+26. After a successful deployment, open the AWS CodeStar project dashboard and copy our _Application endpoints_ location.
 
  
 
-1.
-27.Open up a browser and modify the URL to look something like this:
+
+27. Open up a browser and modify the URL to look something like this:
  [https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/2/3](https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/2/3)
  
 Oh no! It looks like we have a bug. On step 19, we tested the Lambda function add.js in isolation and it performed correctly. However we have not tested the function integrated with the Amazon API Gateway. Head back to our AWS Cloud9 IDE so we can debug this issue.
-2. Open add.js and add a breakpoint on line 17 by clicking on the space next to the row number until it is showing a red dot. Click **Run** to start our debugging session.
+
+28. Open add.js and add a breakpoint on line 17 by clicking on the space next to the row number until it is showing a red dot. Click **Run** to start our debugging session.
 
  
 
-1. Since the bug only appears when the function is called by Amazon API Gateway, we will debug our function using a local API Gateway environment. Enter the following configuration:
+29. Since the bug only appears when the function is called by Amazon API Gateway, we will debug our function using a local API Gateway environment. Enter the following configuration:
   1. Click on the Debug icon
   2. Run on: _API Gateway (local)_
   3. Function: _AddService_
@@ -291,11 +289,11 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
 
  
 
-1. We should now see the debugger stops at line 17. Observing it closely, we need to make adjustment to line 17 to read from the correct event object properties. Make those changes.
+30. We should now see the debugger stops at line 17. Observing it closely, we need to make adjustment to line 17 to read from the correct event object properties. Make those changes.
 
 **Hint:** Watch out for the [data types](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#Examples).
 
-1. Let&#39;s test it again using the command line this time:
+31. Let's test it again using the command line this time:
 
 ```
 sam local start-api&
@@ -309,15 +307,17 @@ curl http://127.0.0.1:3000/add/25/75
 
 We should now receive the right result { … &quot;result&quot;:100 … }
 
-31. Commit our latest changes to AWS CodeCommit again.
+32. Commit our latest changes to AWS CodeCommit again.
+
 ```
 git add -A
 git commit -m "Bugfix: Add() now performs correctly on API GW"
 git push origin master
 ```
-32.	Wait for our Continuous Deployment pipeline to complete, and test it from our live endpoint that looks similar to: https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75  
 
-33. Congratulations, you have completed the lab.
+33.	Wait for our Continuous Deployment pipeline to complete, and test it from our live endpoint that looks similar to: https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75  
+
+34. Congratulations, you have completed the lab.
 
 <a name="cleanup"></a>
 # Clean up
