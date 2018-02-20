@@ -17,10 +17,10 @@ The modules build on each other and are intended to be executed linearly.
 
 |Module| Description |
 |--|--|
-|[Writing your first AWS Lambda Function on AWS Cloud9](https://amazon.awsapps.com/workdocs/index.html#/document/f589ed8c8010f39de92c2ae0a4ee7472848d94e5345a2c07d4ca6e795b08343c)|Add a new service using SAM Local to a serverless application which was created by from AWS CodeStar|
-|[Deploying Your Function using AWS SAM and AWS CodeDeploy](https://amazon.awsapps.com/workdocs/index.html#/document/f589ed8c8010f39de92c2ae0a4ee7472848d94e5345a2c07d4ca6e795b08343c)|Deploy Function to Cloud using AWS developer Tools.|
-|[Debugging and Monitoring your function](https://amazon.awsapps.com/workdocs/index.html#/document/f589ed8c8010f39de92c2ae0a4ee7472848d94e5345a2c07d4ca6e795b08343c)|Debug and monitor your application using Cloud9, CodeStar and xRay and Cloudwatch |
-|[Build a Continuous Deployment Pipeline]((https://aws.amazon.com/blogs/compute/implementing-canary-deployments-of-aws-lambda-functions-with-alias-traffic-shifting/))|Using AWS CodeCommit, AWS CodePipeline, and AWS CodeBuild, create a continuous deployment pipeline to automatically deploy changes to our application|
+|[Writing your first AWS Lambda Function on AWS Cloud9](INSTRUCTIONS.md)|Add a new service using SAM Local to a serverless application which was created by from AWS CodeStar|
+|[Deploying Your Function using AWS SAM and AWS CodeDeploy](INSTRUCTIONS.md)|Deploy Function to Cloud using AWS developer Tools.|
+|[Debugging and Monitoring your function](INSTRUCTIONS.md)|Debug and monitor your application using Cloud9, CodeStar and xRay and Cloudwatch |
+|[Build a Continuous Deployment Pipeline](INSTRUCTIONS.md)|Using AWS CodeCommit, AWS CodePipeline, and AWS CodeBuild, create a continuous deployment pipeline to automatically deploy changes to our application|
 
 ## Theme B -  **Containerized application**
 
