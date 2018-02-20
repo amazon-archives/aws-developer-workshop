@@ -113,15 +113,29 @@ You use the AWS Cloud9 IDE, running in a web browser on your local computer, to 
 1. Upon first login, AWS Cloud9 automatically clone a starter project &quot;locally&quot; into our development instance. You should see something like this:
 
 
-`| user:~/environment $ /tmp/git-cloning-runner-xxx-xxx.shCloning into &#39;/home/ec2-user/environment/serverless-lab&#39;...remote: Counting objects: 16, done.Unpacking objects: 100% (16/16), done. Navigate to your cloned repository by typing &quot;cd /home/ec2-user/environment/serverless-lab&quot; to start working with &quot;https://git-codecommit.us-east-1.amazonaws.com/v1/repos/serverless-lab&quot; To set your display name run &quot;git config --global user.name YOUR\_USER\_NAME&quot;To set your display email run &quot;git config --global user.email YOUR\_EMAIL\_ADDRESS&quot; user:~/environment $ |
-| --- |
+```
+user:~/environment $ /tmp/git-cloning-runner-xxx-xxx.sh
+Cloning into '/home/ec2-user/environment/serverless-lab'...
+remote: Counting objects: 16, done.
+Unpacking objects: 100% (16/16), done.
+
+Navigate to your cloned repository by typing "cd /home/ec2-user/environment/serverless-lab" to start working with "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/serverless-lab"
+
+To set your display name run "git config --global user.name YOUR_USER_NAME"
+To set your display email run "git config --global user.email YOUR_EMAIL_ADDRESS"
+
+user:~/environment $
+
+```
 
 1. We&#39;re going to create a new API microservice in this project. Perform the following command in the terminal window at the bottom (labeled as _bash – &quot;ip-xx-xx-xx-xx&quot;):_
 
+```
 cd serverless-lab
-wget [https://s3-us-west-2.amazonaws.com/apn-bootcamps/serverless-2018/addservice-01.tar.gz](https://s3-us-west-2.amazonaws.com/apn-bootcamps/serverless-2018/addservice-01.tar.gz)
+wget https://s3-us-west-2.amazonaws.com/apn-bootcamps/serverless-2018/addservice-01.tar.gz
 tar xf addservice-01.tar.gz
 rm addservice-01.tar.gz
+```
 
 **Note:** In some browsers (E.g. Google Chrome), you may be prompted to download Cloud9 Browser Extension to enable copy-paste between this document, and the AWS Cloud9 IDE inside the browser window.
 
@@ -161,15 +175,29 @@ Incorporate these \*\ ***requirements\*\*** by modifying the template.yml file:
 
 **Hint:** Use the _GetHelloWorld_ resource definition in the same file (template.yml) to help you apply the necessary changes.  See [Serverless Resources Within AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html) for the complete reference, or use the guide below:
 
-|
-AddService:  Type: AWS::Serverless::Function  Properties:    Handler: filename.handler-function    Runtime: nodejs6.10    Role:      Fn::ImportValue:        !Join [&#39;-&#39;, [!Ref &#39;ProjectId&#39;, !Ref &#39;AWS::Region&#39;, &#39;LambdaTrustRole&#39;]]    Events:      GetEvent:        Type: Api        Properties:          Path: /path/{x}/{y}          Method: any
- |
-| --- |
+```
+AddService:
+  Type: AWS::Serverless::Function
+  Properties:
+    Handler: filename.handler-function
+    Runtime: nodejs6.10
+    Role:
+      Fn::ImportValue:
+        !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+    Events:
+      GetEvent:
+        Type: Api
+        Properties:
+          Path: /path/{x}/{y}
+          Method: any
+```
 
 1. After you are done making those changes. Let&#39;s test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
 /home/ec2-user/environment/serverless-lab/ and perform the following:
 
-sam local invoke &quot;AddService&quot; -e test/event.numbers.json
+```
+sam local invoke "AddService" -e test/event.numbers.json
+```
 
 Our add.js currently do not implement the functionality we are seeking. We are expecting to see &quot;Error: Not Implemented&quot; exception. This means we have configured our SAM template correctly.
 
@@ -181,15 +209,19 @@ Our add.js currently do not implement the functionality we are seeking. We are e
 
 1. You think you got it right? Let&#39;s test out the Lambda function locally again:
 
-sam local invoke &quot;AddService&quot; -e test/event.numbers.json
+```
+sam local invoke "AddService" -e test/event.numbers.json
+```
 
 should return the following:
 
+```
 {
-    &quot;statusCode&quot;:200,
-     **&quot;body&quot;:&quot;{\&quot;result\&quot;:116}&quot;,**
-    &quot;headers&quot;:{&quot;Content-Type&quot;:&quot;application/json, … }
+    "statusCode":200,
+    "body":"{\"result\":116}",
+    "headers":{"Content-Type":"application/json, … }
 }
+```
 
 1. Congratulations! You have implemented add()as an AWS Lambda function.
 
@@ -198,14 +230,19 @@ should return the following:
 
 1. We will now configure our git user in the AWS Cloud9 environment so we can commit our changes to the code repository
 
-git config --global user.email [you@example.com](mailto:you@example.com)
-git config --global user.name &quot;Your Name&quot;
+```
+git config --global user.email you@example.com
+git config --global user.name "Your Name"
+```
 
 2. We are going to add all our pending changes, commit it to Git and push it to our AWS CodeCommit Repository:
 
+```
 git add -A
-git commit -m &quot;add add-as-a-service&quot;
+git commit -m "add add-as-a-service"
 git push origin master
+
+```
 
 
 1. By default, AWS CodeStar configured AWS CodeBuild to deploy on every code commits. Go back to your AWS CodeStar serverless-lab dashboard. You can see the status of the current build, or see more details about the build by selecting **Build** from the left hand pane. You will notice that a build is currently taking place. This will take around 2 minutes.
@@ -216,20 +253,26 @@ git push origin master
 
 To create the package on an S3 Bucket:
 
-|
-aws cloudformation package \    --template-file ./template.yml \    --s3-bucket $S3\_BUCKET \    --s3-prefix $S3\_BUCKET\_PREFIX\_NAME\    --output-template-file ./template.output.yml \    --force-upload
- |
-| --- |
+```
+aws cloudformation package \
+    --template-file ./template.yml \
+    --s3-bucket $S3_BUCKET \
+    --s3-prefix $S3_BUCKET_PREFIX_NAME \
+    --output-template-file ./template.output.yml \
+    --force-upload 
+```
 
 
 
 To execute the deployment:
 
-|
-aws cloudformation deploy \    --template-file ./template.output.yml \    --stack-name $STACK\_NAME \ # E.g. serverless-lab    --capabilities CAPABILITY\_IAM
-    --parameter-overrides ProjectId=$PROJECT\_ID # E.g. serverless-lab
- |
-| --- |
+```
+aws cloudformation deploy \
+    --template-file ./template.output.yml \
+    --stack-name $STACK_NAME \ # E.g. serverless-lab
+    --capabilities CAPABILITY_IAM
+    --parameter-overrides ProjectId=$PROJECT_ID # E.g. serverless-lab
+```
 
 
 <a name="debugging"></a>
@@ -264,20 +307,27 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
 
 1. Let&#39;s test it again using the command line this time:
 
-sam local start-api&amp;
+```
+sam local start-api&
+```
 
 Press enter.
 
+```
 curl http://127.0.0.1:3000/add/25/75
+```
 
 We should now receive the right result { … &quot;result&quot;:100 … }
 
-1. Commit our latest changes to AWS CodeCommit again.
+31. Commit our latest changes to AWS CodeCommit again.
+```
 git add -A
-git commit -m &quot;Bugfix: Add() now performs correctly on API GW&quot;
+git commit -m "Bugfix: Add() now performs correctly on API GW"
 git push origin master
-2. Wait for our Continuous Deployment pipeline to complete, and test it from our live endpoint that looks similar to: [https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75](https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75)
-3. Congratulations, you have completed the lab.
+```
+32.	Wait for our Continuous Deployment pipeline to complete, and test it from our live endpoint that looks similar to: https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75  
+
+33. Congratulations, you have completed the lab.
 
 <a name="cleanup"></a>
 # Clean up
