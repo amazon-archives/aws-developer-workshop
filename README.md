@@ -1,4 +1,4 @@
-## AWS Developer Workshop
+## Modern Application Development Workshop
 
 This is a workshop to get developers started on AWS using the cloud native primitives. This workshop is designed as a self paced lab which incrementally increases in expertise
 
