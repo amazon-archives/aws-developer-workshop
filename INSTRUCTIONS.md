@@ -112,9 +112,11 @@ user:~/environment $ /tmp/git-cloning-runner-xxx-xxx.sh
 Cloning into '/home/ec2-user/environment/serverless-lab'...
 remote: Counting objects: 16, done.
 Unpacking objects: 100% (16/16), done.
+```
 
 Navigate to your cloned repository by typing "cd /home/ec2-user/environment/serverless-lab" to start working with "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/serverless-lab"
 
+```
 To set your display name run "git config --global user.name YOUR_USER_NAME"
 To set your display email run "git config --global user.email YOUR_EMAIL_ADDRESS"
 
@@ -122,7 +124,7 @@ user:~/environment $
 
 ```
 
-17. We are going to create a new API microservice in this project. Perform the following command in the terminal window at the bottom (labeled as _bash – &quot;ip-xx-xx-xx-xx&quot;):_
+17. We are going to create a new API microservice in this project. Perform the following command in the terminal window at the bottom (labeled as bash - "ip-xx-xx-xx-xx")
 
 ```
 cd serverless-lab
@@ -138,7 +140,9 @@ rm addservice-01.tar.gz
 The commands above will add the following files to your local AWS Cloud9 environment: 
 
 a.	add.js - our addition-as-a-service lambda function
+
 b.	test/event.numbers.json - the test payload
+
 c.	.gitignore - instruction for git to ignore temp files
  
 To confirm we have all the files in place, perform ls in the terminal window and you should see the following files:
@@ -153,15 +157,21 @@ To confirm we have all the files in place, perform ls in the terminal window and
 *	\test
 
 
-18. We will need to update our SAM template (_template.yml_) to register our new function.
-Incorporate these \*\ ***requirements\*\*** by modifying the template.yml file:
+18. We will need to update our SAM template (template.yml) to register our new function.
+Incorporate these **requirements** by modifying the template.yml file:
 
-1. Function name: &quot;AddService&quot;
-2. The functionality will be handled by the handler() function in js
-3. Runtime: &quot;10&quot;
-4. Use the same LambdaTrustRole
-5. The event trigger will be coming from our existing &quot;GetEvent&quot; API Gateway
-6. We would like to return a JSON response whenever we receive an _ANY_ HTTP request to the API with path /add/{x}/{y}. Therefore, given [http://[api-address]/add/1/2](http://%5Bapi-address%5D/add/1/2),the API should return { … &quot;result&quot;:3 … }.
+a.	Function name: "AddService" 
+
+b.	The functionality will be handled by the handler() function in add.js
+
+c.	Runtime: "nodejs6.10" 
+
+d.	Use the same LambdaTrustRole
+
+e.	The event trigger will be coming from our existing "GetEvent" API Gateway
+
+f.	We would like to return a JSON response whenever we receive an ANY HTTP request to the API with path /add/{x}/{y}. Therefore, given http://[api-address]/add/1/2,the API should return { … "result":3 … }.  
+
 
 **Hint:** Use the _GetHelloWorld_ resource definition in the same file (template.yml) to help you apply the necessary changes.  See [Serverless Resources Within AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html) for the complete reference, or use the guide below:
 
@@ -195,7 +205,9 @@ Our add.js currently do not implement the functionality we are seeking. We are e
 
 20. Open up _add.js_ and implement our add function in line 12-16.
 
+
  ![](images/10.png) 
+
 
 21. You think you got it right? Let's test out the Lambda function locally again:
 
@@ -285,14 +297,23 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
   ![](images/14.png)
 
 29. Since the bug only appears when the function is called by Amazon API Gateway, we will debug our function using a local API Gateway environment. Enter the following configuration:
-  1. Click on the Debug icon
-  2. Run on: _API Gateway (local)_
-  3. Function: _AddService_
-  4. Path: _/add/1/2_
-  5. Method: _GET_
-  6. Click **Run**
+
+a.	Click on the Debug icon
+
+b.	Run on: API Gateway (local)
+
+c.	Function: AddService
+
+d.	Path: /add/1/2
+
+e.	Method: GET
+
+f.	Click **Run**
+
+
 
  ![](images/15.png) 
+ 
 
 30. We should now see the debugger stops at line 17. Observing it closely, we need to make adjustment to line 17 to read from the correct event object properties. Make those changes.
 
@@ -301,7 +322,7 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
 31. Let's test it again using the command line this time:
 
 ```
-sam local start-api&
+sam local start-api
 ```
 
 Press enter.
