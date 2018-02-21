@@ -45,7 +45,7 @@ In this Lab, you will experience:
 
 In this hands-on lab, we are going to start with a Hello World node.js serverless app that returns a static web page. As part of this lab, we will be developing, testing, debugging and deploying a new serverless function for adding 2 numbers. The high level architecture is as follows:
 
-  * TODO_IMAGE_HERE
+![](images/intro.png)
 
 <a name="devtool"></a>
 # Launching a development toolchain using AWS CodeStar
@@ -64,14 +64,14 @@ Under _Application Category_ select _Web Application._
 Under _Programming Languages_ select _Node.js._
 Pick _Node.JS Web Application AWS Lambda (running serverless)._
 
- 
+ ![](images/2.png)
 
 7. Enter the project details:
 Project name: _serverless-lab._
 Which repository do you want to use? _AWS CodeCommit._
 Click **Next**.
 
- 
+ ![](images/3.png)
 
 8. Leave everything as the default and click on **Create Project**. If this is the first time you use the service, you will also be prompted to enter your display name and email.
 9. We are going to use AWS Cloud9 as our IDE. Select AWS Cloud9 and hit **Next.**
@@ -80,14 +80,15 @@ Click **Next**.
 
 11. AWS CodeStar is now provisioning all the AWS Code \* services. This process may take around 3-5 minutes.
 
- 
+  ![](images/4.png)
 
 12. While you wait, open up a new browser tab and go to the [IAM Roles console](https://console.aws.amazon.com/iam/home?region=us-east-1#/roles) (listed under Services). Search for 'code' and notice that AWS CodeStar created new IAM Roles for each of the AWS service we are going to use.
 
- 
+ ![](images/5.png) 
 
 13. Head back to the _AWS CodeStar Dashboard_ and scroll to the _Application endpoints_ panel.
 
+![](images/6.png)
  
 14. Click on the endpoint URL. You should see a &quot;Hello World&quot; web page rendered by Node.js. Congratulations! You successfully configured an end-to-end development and continuous deployment pipeline on AWS.
 
@@ -98,7 +99,9 @@ Click **Next**.
 Click **Open IDE.**
 
  
-
+ ![](images/7.png)
+ 
+ ![](images/8.png)
 
 
 16. Upon first login, AWS Cloud9 automatically clone a starter project "locally" into our development instance. You should see something like this:
@@ -130,7 +133,7 @@ rm addservice-01.tar.gz
 
 **Note:** In some browsers (E.g. Google Chrome), you may be prompted to download Cloud9 Browser Extension to enable copy-paste between this document, and the AWS Cloud9 IDE inside the browser window.
 
- 
+ ![](images/9.png) 
 
 The commands above will add the following files to your local AWS Cloud9 environment: 
 
@@ -192,7 +195,7 @@ Our add.js currently do not implement the functionality we are seeking. We are e
 
 20. Open up _add.js_ and implement our add function in line 12-16.
 
- 
+ ![](images/10.png) 
 
 21. You think you got it right? Let's test out the Lambda function locally again:
 
@@ -234,7 +237,7 @@ git push origin master
 
 25. By default, AWS CodeStar configured AWS CodeBuild to deploy on every code commits. Go back to your AWS CodeStar serverless-lab dashboard. You can see the status of the current build, or see more details about the build by selecting **Build** from the left hand pane. You will notice that a build is currently taking place. This will take around 2 minutes.
 
- 
+ ![](images/11.png) 
 
 **Note:** You can also deploy the AWS Lambda function manually, by executing the following commands. You will need to provide S3 bucket location, CloudFormation Stack name and other parameters that the CloudFormation requires.
 
@@ -268,16 +271,18 @@ aws cloudformation deploy \
 26. After a successful deployment, open the AWS CodeStar project dashboard and copy our _Application endpoints_ location.
 
  
-
+ ![](images/12.png)
 
 27. Open up a browser and modify the URL to look something like this:
  [https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/2/3](https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/2/3)
  
+  ![](images/13.png)
+  
 Oh no! It looks like we have a bug. On step 19, we tested the Lambda function add.js in isolation and it performed correctly. However we have not tested the function integrated with the Amazon API Gateway. Head back to our AWS Cloud9 IDE so we can debug this issue.
 
 28. Open add.js and add a breakpoint on line 17 by clicking on the space next to the row number until it is showing a red dot. Click **Run** to start our debugging session.
 
- 
+  ![](images/14.png)
 
 29. Since the bug only appears when the function is called by Amazon API Gateway, we will debug our function using a local API Gateway environment. Enter the following configuration:
   1. Click on the Debug icon
@@ -287,7 +292,7 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
   5. Method: _GET_
   6. Click **Run**
 
- 
+ ![](images/15.png) 
 
 30. We should now see the debugger stops at line 17. Observing it closely, we need to make adjustment to line 17 to read from the correct event object properties. Make those changes.
 
