@@ -146,7 +146,9 @@ The commands above will add the following files to your local AWS Cloud9 environ
 * test/event.numbers.json - the test payload
 * .gitignore - instruction for git to ignore temp files
  
+ 
 To confirm we have all the files in place, perform ls in the terminal window and you should see the following files:
+
 
 *	add.js
 *	buildspec.yml
@@ -161,17 +163,14 @@ To confirm we have all the files in place, perform ls in the terminal window and
 18. We will need to update our SAM template (template.yml) to register our new function.
 Incorporate these **requirements** by modifying the template.yml file:
 
+
 * Function name: "AddService" 
-
 * The functionality will be handled by the handler() function in add.js
-
 * Runtime: "nodejs6.10" 
-
 * Use the same LambdaTrustRole
-
 * The event trigger will be coming from our existing "GetEvent" API Gateway
-
 * We would like to return a JSON response whenever we receive an ANY HTTP request to the API with path /add/{x}/{y}. Therefore, given http://[api-address]/add/1/2,the API should return { … "result":3 … }.  
+
 
 
 **Hint:** Use the _GetHelloWorld_ resource definition in the same file (template.yml) to help you apply the necessary changes.  See [Serverless Resources Within AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html) for the complete reference, or use the guide below:
