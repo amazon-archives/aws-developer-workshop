@@ -67,8 +67,11 @@ Pick _Node.JS Web Application AWS Lambda (running serverless)._
  ![](images/2.png)
 
 7. Enter the project details:
+
 Project name: _serverless-lab._
+
 Which repository do you want to use? _AWS CodeCommit._
+
 Click **Next**.
 
  ![](images/3.png)
@@ -139,11 +142,9 @@ rm addservice-01.tar.gz
 
 The commands above will add the following files to your local AWS Cloud9 environment: 
 
-a.	add.js - our addition-as-a-service lambda function
-
-b.	test/event.numbers.json - the test payload
-
-c.	.gitignore - instruction for git to ignore temp files
+* add.js - our addition-as-a-service lambda function
+* test/event.numbers.json - the test payload
+* .gitignore - instruction for git to ignore temp files
  
 To confirm we have all the files in place, perform ls in the terminal window and you should see the following files:
 
@@ -160,17 +161,17 @@ To confirm we have all the files in place, perform ls in the terminal window and
 18. We will need to update our SAM template (template.yml) to register our new function.
 Incorporate these **requirements** by modifying the template.yml file:
 
-a.	Function name: "AddService" 
+* Function name: "AddService" 
 
-b.	The functionality will be handled by the handler() function in add.js
+* The functionality will be handled by the handler() function in add.js
 
-c.	Runtime: "nodejs6.10" 
+* Runtime: "nodejs6.10" 
 
-d.	Use the same LambdaTrustRole
+* Use the same LambdaTrustRole
 
-e.	The event trigger will be coming from our existing "GetEvent" API Gateway
+* The event trigger will be coming from our existing "GetEvent" API Gateway
 
-f.	We would like to return a JSON response whenever we receive an ANY HTTP request to the API with path /add/{x}/{y}. Therefore, given http://[api-address]/add/1/2,the API should return { … "result":3 … }.  
+* We would like to return a JSON response whenever we receive an ANY HTTP request to the API with path /add/{x}/{y}. Therefore, given http://[api-address]/add/1/2,the API should return { … "result":3 … }.  
 
 
 **Hint:** Use the _GetHelloWorld_ resource definition in the same file (template.yml) to help you apply the necessary changes.  See [Serverless Resources Within AWS SAM](http://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html) for the complete reference, or use the guide below:
@@ -192,14 +193,14 @@ AddService:
           Method: any
 ```
 
-19. After you are done making those changes. Let&#39;s test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
+19. After you are done making those changes. Let's test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
 /home/ec2-user/environment/serverless-lab/ and perform the following:
 
 ```
 sam local invoke "AddService" -e test/event.numbers.json
 ```
 
-Our add.js currently do not implement the functionality we are seeking. We are expecting to see &quot;Error: Not Implemented&quot; exception. This means we have configured our SAM template correctly.
+Our add.js currently do not implement the functionality we are seeking. We are expecting to see "Error: Not Implemented" exception. This means we have configured our SAM template correctly.
 
 **Note:** The first time you execute a function, SAM LOCAL will fetch the appropriate Docker image for the function as defined in our template.yml. Once that is done, SAM LOCAL will invoke theLambda function we just wrote, showed the response, _Duration_ and the _Max Memory Used_ metric which is useful for tuning our AWS Lambda function configuration.
 
@@ -298,17 +299,17 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
 
 29. Since the bug only appears when the function is called by Amazon API Gateway, we will debug our function using a local API Gateway environment. Enter the following configuration:
 
-a.	Click on the Debug icon
+* Click on the Debug icon
 
-b.	Run on: API Gateway (local)
+* Run on: API Gateway (local)
 
-c.	Function: AddService
+* Function: AddService
 
-d.	Path: /add/1/2
+* Path: /add/1/2
 
-e.	Method: GET
+* Method: GET
 
-f.	Click **Run**
+* Click **Run**
 
 
 
@@ -331,7 +332,7 @@ Press enter.
 curl http://127.0.0.1:3000/add/25/75
 ```
 
-We should now receive the right result { … &quot;result&quot;:100 … }
+We should now receive the right result { … "result":100 … }
 
 32. Commit our latest changes to AWS CodeCommit again.
 
