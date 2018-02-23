@@ -191,6 +191,7 @@ AddService:
           Path: /path/{x}/{y}
           Method: any
 ```
+**HINT** Make sure to update the Handler and Path values with the AddService details.
 
 19. After you are done making those changes. Let's test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
 /home/ec2-user/environment/serverless-lab/ and perform the following:
@@ -325,13 +326,13 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
 sam local start-api
 ```
 
-Press enter.
+Press enter.  This will start a process that runs and monitors the api endpoint.  Open a new terminal and run
 
 ```
 curl http://127.0.0.1:3000/add/25/75
 ```
 
-We should now receive the right result { … "result":100 … }
+We should now receive the right result { … "result":100 … } (Note that the output may be formatted to appear before the terminal prompt)
 
 32. Commit our latest changes to AWS CodeCommit again.
 
