@@ -13,7 +13,9 @@ We will do this workshop in a pair programming mode. So find a buddy.
 
 The modules build on each other and are intended to be executed linearly.
 
-## Theme A - **Serverless application**
+## Basics
+
+## **Serverless application**
 
 |Module| Description |
 |--|--|
@@ -22,7 +24,9 @@ The modules build on each other and are intended to be executed linearly.
 |[Debugging and Monitoring your function](INSTRUCTIONS.md)|Debug and monitor your application using Cloud9, CodeStar and xRay and Cloudwatch |
 |[Build a Continuous Deployment Pipeline](INSTRUCTIONS.md)|Using AWS CodeCommit, AWS CodePipeline, and AWS CodeBuild, create a continuous deployment pipeline to automatically deploy changes to our application|
 
-## Theme B -  **Containerized application**
+## **Containerized application**
+
+**Fargate**
 
 |Module| Description |
 |--|--|
@@ -32,7 +36,20 @@ The modules build on each other and are intended to be executed linearly.
 |[Create a Service](http://running-containers-on-aws-fargate.s3-website-us-east-1.amazonaws.com/create-a-service.html)|Fork a sample application from GitHub which uses an Amazon DynamoDB table to store notable quotations and build it as a Docker container image and push it to your new Docker image repository.
 |[Build a Continuous Deployment Pipeline](http://running-containers-on-aws-fargate.s3-website-us-east-1.amazonaws.com/build-a-continuous-deployment-pipeline.html)|Using AWS CodeCommit, AWS CodePipeline, and AWS CodeBuild, create a continuous deployment pipeline to automatically deploy changes to our application|
 
-## **Advanced Topics**
+**ECS**
+
+|Module| Description |
+|--|--|
+| [Deploy Java spring PetClining microservice app on ECS](https://github.com/awslabs/amazon-ecs-java-microservices/tree/master/3_ECS_Java_Spring_PetClinic_CICD) | We will be using AWS CodeCommit, AWS CodePipeline, AWS CodeBuild to demonstrate continuous delivery of a Java Spring Boot microservices. We will be using the Spring PetClinic project. |
+
+**Kubernetes**
+
+|Module| Description |
+|--|--|
+| [Deploy a sample application on Kubernetes](https://github.com/aws-samples/aws-kube-codesuite) | The CodeSuite Continuous Deployment reference architecture demonstrates how to achieve continuous deployment of an application to a Kubernetes cluster using AWS CodePipeline, AWS CodeCommit, AWS CodeBuild and AWS Lambda. We will use a sample puython application. |
+
+
+## **Intermediate**
 
 |Module| Description |
 |--|--|
@@ -40,6 +57,8 @@ The modules build on each other and are intended to be executed linearly.
 |[Deploying Deep Learning Functions on ECS](https://github.com/awslabs/ecs-mxnet-example)|Create an automated workflow that will provision, configure and orchestrate a pipeline triggering deployment of any changes to your AI model or application code.|
 |[Deploying Deep Learning Functions on Lambda](https://github.com/awslabs/mxnet-lambda)|Predict labels along with their probablities for an image using a pre-trained model with Apache MXNet deployed on AWS Lambda|
 |[Containers - Blue-Green Deployment](https://github.com/awslabs/ecs-canary-blue-green-deployment)|Execute a canary deployment for Amazon EC2 Container Service. In order to provide an automated and safe method of migrating traffic from a blue deployment to a green one, this solution leverages Route53 weights to adjust the traffic flow from one ECS service to another.|
+
+
 ## License
 
 This repository contains multiple directories, each individually licensed. Please see the LICENSE file in each directory. 
