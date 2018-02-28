@@ -44,7 +44,7 @@ The modules build on each other and are intended to be executed linearly.
 |--|--|--|
 |Basic| [Deploy Java spring PetClining microservice app on ECS](https://github.com/awslabs/amazon-ecs-java-microservices/tree/master/3_ECS_Java_Spring_PetClinic_CICD) | We will be using AWS CodeCommit, AWS CodePipeline, AWS CodeBuild to demonstrate continuous delivery of a Java Spring Boot microservices. We will be using the Spring PetClinic project. |
 |Intermediate|[Containers - Blue-Green Deployment](https://github.com/awslabs/ecs-canary-blue-green-deployment)|Execute a canary deployment for Amazon EC2 Container Service. In order to provide an automated and safe method of migrating traffic from a blue deployment to a green one, this solution leverages Route53 weights to adjust the traffic flow from one ECS service to another.|
-|Intermediate ||[Deploying Deep Learning Functions on ECS](https://github.com/awslabs/ecs-mxnet-example)|Create an automated workflow that will provision, configure and orchestrate a pipeline triggering deployment of any changes to your AI model or application code.|
+|Intermediate|[Deploying Deep Learning Functions on ECS](https://github.com/awslabs/ecs-mxnet-example)| Create an automated workflow that will provision, configure and orchestrate a pipeline triggering deployment of any changes to your AI model or application code.|
 
 
 **Kubernetes**
