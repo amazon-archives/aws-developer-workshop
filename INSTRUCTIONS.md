@@ -20,7 +20,7 @@ Table of Contents
 
 
 <a name="overview"></a>
-# Overview
+# 1. Overview
 
 With services like AWS CodeStar, AWS Cloud9, AWS Lambda and Amazon API Gateway, developers can very easily develop, debug, and deploy serverless applications in the cloud.
 
@@ -41,14 +41,14 @@ In this Lab, you will experience:
 
 
 <a name="intro"></a>
-# Introduction
+# 2. Introduction
 
 In this hands-on lab, we are going to start with a Hello World node.js serverless app that returns a static web page. As part of this lab, we will be developing, testing, debugging and deploying a new serverless function for adding 2 numbers. The high level architecture is as follows:
 
 ![](images/intro.png)
 
 <a name="devtool"></a>
-# Launching a development toolchain using AWS CodeStar
+# 3. Launching a development toolchain using AWS CodeStar
 
 1. Sign into the AWS Management Console [https://console.aws.amazon.com/](https://console.aws.amazon.com/).
 
@@ -79,7 +79,7 @@ Click **Next**.
 8. Leave everything as the default and click on **Create Project**. If this is the first time you use the service, you will also be prompted to enter your display name and email.
 9. We are going to use AWS Cloud9 as our IDE. Select AWS Cloud9 and hit **Next.**
 
-10. For our instance, we will select _t2.small_. We will leave the networking settings as default which will launch the instance in our default VPC in a public subnet. Under _Cost-saving_ settings, observe that the environment will be automatically shut down after 30 minutes. Click **Next**.
+10. For our instance, we will select _t2.micro_. We will leave the networking settings as default which will launch the instance in our default VPC in a public subnet. Under _Cost-saving_ settings, observe that the environment will be automatically shut down after 30 minutes. Click **Next**.
 
 11. AWS CodeStar is now provisioning all the AWS Code \* services. This process may take around 3-5 minutes.
 
@@ -96,7 +96,7 @@ Click **Next**.
 14. Click on the endpoint URL. You should see a &quot;Hello World&quot; web page rendered by Node.js. Congratulations! You successfully configured an end-to-end development and continuous deployment pipeline on AWS.
 
 <a name="cloud9"></a>
-# Writing your first AWS Lambda Function on AWS Cloud9
+# 4. Writing your first AWS Lambda Function on AWS Cloud9
 
 15. Go back to the AWS CodeStar dashboard, and click on **IDE** on the left pane.
 Click **Open IDE.**
@@ -115,16 +115,13 @@ user:~/environment $ /tmp/git-cloning-runner-xxx-xxx.sh
 Cloning into '/home/ec2-user/environment/serverless-lab'...
 remote: Counting objects: 16, done.
 Unpacking objects: 100% (16/16), done.
-```
 
 Navigate to your cloned repository by typing "cd /home/ec2-user/environment/serverless-lab" to start working with "https://git-codecommit.us-east-1.amazonaws.com/v1/repos/serverless-lab"
 
-```
 To set your display name run "git config --global user.name YOUR_USER_NAME"
 To set your display email run "git config --global user.email YOUR_EMAIL_ADDRESS"
 
 user:~/environment $
-
 ```
 
 17. We are going to create a new API microservice in this project. Perform the following command in the terminal window at the bottom (labeled as bash - "ip-xx-xx-xx-xx")
@@ -142,34 +139,34 @@ rm addservice-01.tar.gz
 
 The commands above will add the following files to your local AWS Cloud9 environment: 
 
-* add.js - our addition-as-a-service lambda function
-* test/event.numbers.json - the test payload
-* .gitignore - instruction for git to ignore temp files
+* `add.js` - our addition-as-a-service lambda function
+* `test/event.numbers.json` - the test payload
+* `.gitignore` - instruction for git to ignore temp files
  
  
 To confirm we have all the files in place, perform ls in the terminal window and you should see the following files:
 
 
-*	add.js
-*	buildspec.yml
-*	index.js
-*	\nothing	
-* \public
-*	README.md
-*	template.yml
-*	\test
+*	`add.js`
+*	`buildspec.yml`
+*	`index.js`
+*	`\nothing`
+* `\public`
+*	`README.md`
+*	`template.yml`
+*	`\test`
 
 
-18. We will need to update our SAM template (template.yml) to register our new function.
-Incorporate these **requirements** by modifying the template.yml file:
+18. We will need to update our SAM template (`template.yml`) to register our new function.
+Incorporate these **requirements** by modifying the `template.yml` file:
 
 
-* Function name: "AddService" 
-* The functionality will be handled by the handler() function in add.js
-* Runtime: "nodejs6.10" 
-* Use the same LambdaTrustRole
-* The event trigger will be coming from our existing "GetEvent" API Gateway
-* We would like to return a JSON response whenever we receive an ANY HTTP request to the API with path /add/{x}/{y}. Therefore, given http://[api-address]/add/1/2,the API should return { … "result":3 … }.  
+* Function name: `AddService`
+* The functionality will be handled by the `handler()` function in `add.js`
+* Runtime: `nodejs6.10`
+* Use the same `LambdaTrustRole`
+* The event trigger will be coming from our existing `GetEvent` API Gateway
+* We would like to return a JSON response whenever we receive an `ANY` HTTP request to the API with path `/add/{x}/{y}`. Therefore, given `http://[api-address]/add/1/2`, the API should return `{ … "result":3 … }`.  
 
 
 
@@ -194,13 +191,13 @@ AddService:
 **HINT** Make sure to update the Handler and Path values with the AddService details.
 
 19. After you are done making those changes. Let's test our resource definition locally in our Cloud9 environment to make sure we have defined our new AWS Lambda function correctly. In the terminal window, confirm that you are in
-/home/ec2-user/environment/serverless-lab/ and perform the following:
+`/home/ec2-user/environment/serverless-lab/` and perform the following:
 
 ```
 sam local invoke "AddService" -e test/event.numbers.json
 ```
 
-Our add.js currently do not implement the functionality we are seeking. We are expecting to see "Error: Not Implemented" exception. This means we have configured our SAM template correctly.
+Our add.js currently do not implement the functionality we are seeking. We are expecting to see `Error: Not Implemented` exception. This means we have configured our SAM template correctly.
 
 **Note:** The first time you execute a function, SAM LOCAL will fetch the appropriate Docker image for the function as defined in our template.yml. Once that is done, SAM LOCAL will invoke theLambda function we just wrote, showed the response, _Duration_ and the _Max Memory Used_ metric which is useful for tuning our AWS Lambda function configuration.
 
@@ -229,7 +226,7 @@ should return the following:
 22. Congratulations! You have implemented add()as an AWS Lambda function.
 
 <a name="sam"></a>
-# Deploying Your Function using AWS SAM and AWS CodeDeploy
+# 5. Deploying Your Function using AWS SAM and AWS CodeDeploy
 
 23. We will now configure our git user in the AWS Cloud9 environment so we can commit our changes to the code repository
 
@@ -279,7 +276,7 @@ aws cloudformation deploy \
 
 
 <a name="debugging"></a>
-# Debugging and Monitoring your function
+# 6. Debugging and Monitoring your function
 
 26. After a successful deployment, open the AWS CodeStar project dashboard and copy our _Application endpoints_ location.
 
@@ -291,7 +288,7 @@ aws cloudformation deploy \
  
   ![](images/13.png)
   
-Oh no! It looks like we have a bug. On step 19, we tested the Lambda function add.js in isolation and it performed correctly. However we have not tested the function integrated with the Amazon API Gateway. Head back to our AWS Cloud9 IDE so we can debug this issue.
+Oh no! It looks like we have a bug. On step 19, we tested the Lambda function `add.js` in isolation and it performed correctly. However we have not tested the function integrated with the Amazon API Gateway. Head back to our AWS Cloud9 IDE so we can debug this issue.
 
 28. Open add.js and add a breakpoint on line 17 by clicking on the space next to the row number until it is showing a red dot. Click **Run** to start our debugging session.
 
@@ -326,13 +323,13 @@ Oh no! It looks like we have a bug. On step 19, we tested the Lambda function ad
 sam local start-api
 ```
 
-Press enter.  This will start a process that runs and monitors the api endpoint.  Open a new terminal and run
+Press enter.  This will start a process that runs and monitors the api endpoint.  Open a new terminal from the bottom `Console` window, and run the following command:
 
 ```
 curl http://127.0.0.1:3000/add/25/75
 ```
 
-We should now receive the right result { … "result":100 … } (Note that the output may be formatted to appear before the terminal prompt)
+We should now receive the right result `{ … "result":100 … }` (Note that the output may be formatted to appear before the terminal prompt)
 
 32. Commit our latest changes to AWS CodeCommit again.
 
@@ -347,11 +344,11 @@ git push origin master
 34. Congratulations, you have completed the lab.
 
 <a name="cleanup"></a>
-# Clean up
+# 7. Clean up
 
-After you are done with your lab, head over to the CloudFormation console (listed under Services) and delete aws-cloud9-serverless-lab-xxxxxx, awscodestar-serverless-lab-lambda, and awscodestar-server-lab stacks. This will delete all the resources we created during this lab.
+After you are done with your lab, head over to the CloudFormation console (listed under Services) and delete `aws-cloud9-serverless-lab-xxxxxx`, `awscodestar-serverless-lab-lambda`, and `awscodestar-server-lab` stacks. This will delete all the resources we created during this lab.
 
 <a name="conclusion"></a>
-# Conclusion
+# 8. Conclusion
 
 In this lab you have learned creating end-to-end development tools using AWS CloudStar, writing your first Serverless microservice using AWS Lambda and Amazon API Gateway using the AWS Cloud9 IDE.
