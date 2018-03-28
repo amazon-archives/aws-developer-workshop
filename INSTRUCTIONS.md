@@ -12,7 +12,7 @@ Table of Contents
 
 * [Deploying Your Function using AWS SAM and AWS CodeDeploy](#sam)
 
-* [Debugging and Monitoring your function](#debug)
+* [Debugging and Monitoring your function](#debugging-and-monitoring-your-function)
 
 * [Clean up](#cleanup)
 
