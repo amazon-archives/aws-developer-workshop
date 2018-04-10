@@ -129,7 +129,7 @@ user:~/environment $
 ```
 cd serverless-lab
 wget https://s3-us-west-2.amazonaws.com/apn-bootcamps/serverless-2018/addservice-01.tar.gz
-tar xf addservice-01.tar.gz
+tar xzf addservice-01.tar.gz
 rm addservice-01.tar.gz
 ```
 
