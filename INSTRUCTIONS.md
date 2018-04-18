@@ -155,6 +155,7 @@ To confirm we have all the files in place, perform ls in the terminal window and
 *	`README.md`
 *	`template.yml`
 *	`\test`
+*	`\tests`
 
 
 18. We will need to update our SAM template (`template.yml`) to register our new function.
