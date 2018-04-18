@@ -198,9 +198,9 @@ AddService:
 sam local invoke "AddService" -e test/event.numbers.json
 ```
 
-Our add.js currently do not implement the functionality we are seeking. We are expecting to see `Error: Not Implemented` exception. This means we have configured our SAM template correctly.
+Our add.js currently does not implement the functionality we are seeking. We are expecting to see `Error: Not Implemented` exception. This means we have configured our SAM template correctly.
 
-**Note:** The first time you execute a function, SAM LOCAL will fetch the appropriate Docker image for the function as defined in our template.yml. Once that is done, SAM LOCAL will invoke theLambda function we just wrote, showed the response, _Duration_ and the _Max Memory Used_ metric which is useful for tuning our AWS Lambda function configuration.
+**Note:** The first time you execute a function, SAM LOCAL will fetch the appropriate Docker image for the function as defined in our template.yml. Once that is done, SAM LOCAL will invoke the Lambda function we just wrote, show the response, _Duration_ and the _Max Memory Used_ metric which is useful for tuning our AWS Lambda function configuration.
 
 20. Open up _add.js_ and implement our add function in line 12-16.
 
