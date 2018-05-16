@@ -23,7 +23,7 @@ The modules build on each other and are intended to be executed linearly.
 |Basic |[Deploying Your Function using AWS SAM and AWS CodeDeploy](INSTRUCTIONS.md)|Deploy Function to Cloud using AWS developer Tools.|
 |Basic |[Debugging and Monitoring your function](INSTRUCTIONS.md)|Debug and monitor your application using Cloud9, CodeStar and xRay and Cloudwatch |
 |Basic |[Build a Continuous Deployment Pipeline](INSTRUCTIONS.md)|Using AWS CodeCommit, AWS CodePipeline, and AWS CodeBuild, create a continuous deployment pipeline to automatically deploy changes to our application|
-|Basic |[Build a Serverless Data Processing Application](https://github.com/aws-samples/aws-developer-workshop/blob/master/episode2/Instructions.md)|Process streaming data from the Twitter API with Amazon Kinesis and AWS Lambda and recognize pictures of celebrities with Amazon Rekognition|
+|Basic |[Build a Serverless Data Processing Application](/episode2/Instructions.md)|Process streaming data from the Twitter API with Amazon Kinesis and AWS Lambda and recognize pictures of celebrities with Amazon Rekognition|
 |Intermediate |[Deploying Deep Learning Functions on Lambda](https://github.com/awslabs/mxnet-lambda)|Predict labels along with their probablities for an image using a pre-trained model with Apache MXNet deployed on AWS Lambda|
 
 
