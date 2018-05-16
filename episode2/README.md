@@ -4,5 +4,6 @@ In this workshop, we will build a solution that listens to Twitter feed and capt
 
 
 ### [Get started and follow the instructions >>](Instructions.md)
+##
 
 ![](media/architecture.png)
