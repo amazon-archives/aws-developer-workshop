@@ -34,7 +34,7 @@
 
 - [Clean up](Instructions.md#clean-up)
 
-<a href="https://www.twitch.tv/videos/262115611" target="_blank"><img src="images/twitch_2.png" align="center" width="500" alt="Serverless Bytes | Building a Serverless App"></a>
+<a href="https://www.twitch.tv/videos/262115611" target="_blank"><img src="media/twitch_2.png" align="center" width="500" alt="Serverless Bytes | Building a Serverless App"></a>
 Follow along this workshop on <a href="https://www.twitch.tv/videos/262115611" target="_blank">Twitch</a>.
 
 ## Overview
