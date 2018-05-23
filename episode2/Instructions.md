@@ -34,6 +34,7 @@
 
 - [Clean up](Instructions.md#clean-up)
 
+![](episode2/images/intro.png)
 Follow along this workshop on <a href="https://www.twitch.tv/videos/262115611" target="_blank">Twitch</a>.
 
 ## Overview
