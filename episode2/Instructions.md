@@ -258,7 +258,7 @@ Follow the steps below to run python application on EC2 instance that will start
 
 ![](media/c9lambda02.png)
 
-- Update lambda function so it compares images from incoming tweets with the reference image. We will use Rekognition API to achieve face comparison. Review more details about the face comparison API at http://boto3.readthedocs.io/en/latest/reference/services/rekognition.html#Rekognition.Client.compare_faces
+- Update lambda function [with this code](scripts/compareFaces.py) so it compares images from incoming tweets with the reference image. We will use Rekognition API to achieve face comparison. Review more details about the face comparison API at http://boto3.readthedocs.io/en/latest/reference/services/rekognition.html#Rekognition.Client.compare_faces
 
 - Join us at Twitch to live edit this Lambda function and compare incoming images from tweets with the reference images.
 
