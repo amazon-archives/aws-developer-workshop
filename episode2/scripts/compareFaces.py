@@ -22,7 +22,7 @@ rekognition = boto3.client('rekognition', this_region)
 def detect_faces(bucket, key):
     response = rekognition.detect_faces(Image={"S3Object": {"Bucket": bucket, "Name": key}})
     return len(response['FaceDetails'])
-    
+
 def compare_faces(bucket, sourcekey, targetkey, threshold=70):
 
     response = rekognition.compare_faces(
@@ -60,17 +60,17 @@ def compare_faces(bucket, sourcekey, targetkey, threshold=70):
                 ':s': similarity +'%'
             },
             ReturnValues="UPDATED_NEW"
-        ) 
+        )
 
         print ("Similarity = " + similarity)
         # We also use the DynamoDB record to provide additional twitter meta data in our message back to the subscribers of our SNS Topic
-        message = ('Possible match for missing person in https://'+ bucket + '.s3.amazonaws.com/' + targetkey +'\n' +
+        message = ('Possible match for favorite celebrity in https://'+ bucket + '.s3.amazonaws.com/' + targetkey +'\n' +
             "Image originated from " + record['Item']['user_handle'] +".\n" +
             "Posted on " + record['Item']['created'] + ".\n" +
-            "Similarity of person in image to missing person : " + similarity + '%')
+            "Similarity of person in image to favorite celebrity : " + similarity + '%')
         # Send out (publish) a message with information about the possible match
         send_notification(message)
-        
+
     return message
 
 # Send(publish) message via SNS if match is detected
@@ -113,7 +113,7 @@ def lambda_handler(event, context):
     print("bucket: " + bucket)
     print('targetFile: ' + targetFile)
     print("len(FaceDetails): " + str(detect_faces(bucket,targetFile)))
-    
+
     #First we want to check if there are faces in the image from Twitter. If there are no faces, we simply delete the object from S3
     if detect_faces(bucket,targetFile)<=0:
         s3.delete_object(Bucket=bucket, Key=targetFile)
@@ -121,7 +121,7 @@ def lambda_handler(event, context):
     else:
         # Face(s) is/are present in the object
         print("Faces detected in " + targetFile)
-        # We get the Missing Person photo, using the filename you provided when creating the CloudFormation stack
+        # We get the favorite celebrity photo, using the filename you provided when creating the CloudFormation stack
         sourceFile = os.environ['RefPhoto']
         print("Ref photo:" + sourceFile)
         try:
