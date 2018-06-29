@@ -1,3 +1,5 @@
+# Build a Serverless Data Processing Application
+### 
 
 ![](media/aws.png)
 
@@ -34,6 +36,10 @@
 
 
 ## Overview
+
+<a href="https://www.twitch.tv/videos/262115611" target="_blank"><img src="media/twitch_2.png" align="center" width="500" alt="Serverless Bytes | Building a Serverless App"></a>
+
+Follow along this workshop on <a href="https://www.twitch.tv/videos/262115611" target="_blank">Twitch</a>.
 
 In this workshop, we will build a solution that listens to Twitter feed and capture images from that feed. It then compares those images against the reference image of your favorite celebrity and notifies you about the latest post about your favorite celebrity.
 
