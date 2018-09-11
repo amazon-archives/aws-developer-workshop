@@ -35,6 +35,10 @@
 
 ## Overview
 
+<a href="https://www.youtube.com/watch?v=ohXgbcbYH7U" target="_blank"><img src="images/twitch.png" align="center" width="500" alt="Serverless Bytes | Building a Serverless Data Processing App"></a>
+<br />
+Follow along this workshop on <a href="https://www.youtube.com/watch?v=ohXgbcbYH7U" target="_blank">YouTube</a>.
+
 In this workshop, we will build a solution that listens to Twitter feed and capture images from that feed. It then compares those images against the reference image of your favorite celebrity and notifies you about the latest post about your favorite celebrity.
 
 In this workshop, we will use following AWS services:
