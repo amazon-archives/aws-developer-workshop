@@ -396,9 +396,9 @@ git push origin master
 
 https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75 
 
-38. Go to X-Ray console and observer Service Map and Traces.
+39. Go to X-Ray console and observer Service Map and Traces.
 
-39. Congratulations, you have completed the lab.
+40. Congratulations, you have completed the lab.
 
 <a name="cleanup"></a>
 # 7. Clean up
