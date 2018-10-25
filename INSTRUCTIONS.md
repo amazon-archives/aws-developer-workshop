@@ -344,7 +344,59 @@ git push origin master
 
 33.	Wait for our Continuous Deployment pipeline to complete, and test it from our live endpoint that looks similar to: https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75  
 
-34. Congratulations, you have completed the lab.
+## Adding AWS x-ray to your lambda function
+
+35. Go to project dashboard and click Project on the left menu. We need to add xray permission to the lambda execution policy.  Click CodeStarWorker-serverless-lab-Lambda role and add the following x-ray FullAccess to the policy.
+
+```
+        {
+            "Sid": "2",
+            "Effect": "Allow",
+            "Action": [
+                "apigateway:GET",
+                "logs:DescribeLogGroups",
+                "xray:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+```
+![](images/16.png) 
+
+34. Enable AWS x-ray to your lambda function by updating template.yml with Properties, Trace: Active. Save and commit the changes.
+
+```
+  AddService:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: add.handler
+      Runtime: nodejs6.10
+      Trace: Active
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /path/{x}/{y}
+            Method: any
+```            
+
+35. Go to Project Dashboard and observe the project goes through CodePipeline.  Once completed, go to Lambda Function and observer Tracing is enabled. 
+
+![](images/17.png) 
+
+36. Go to API Gateway console to enable x-ray Tracing. Select API gateway for this project then select Stage. For both Prod and Staging, enable X-Ray Tracing.
+
+![](images/18.png)
+
+37. Go back to CodeStar Project dasboard and click EndPoint link to access WebAPP.
+
+38. Go to x-ray console. 
+
+36. Congratulations, you have completed the lab.
 
 <a name="cleanup"></a>
 # 7. Clean up
