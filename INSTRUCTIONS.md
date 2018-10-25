@@ -372,7 +372,7 @@ git push origin master
     Properties:
       Handler: add.handler
       Runtime: nodejs6.10
-      Trace: Active
+      Tracing: Active
       Role:
         Fn::ImportValue:
           !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
@@ -392,9 +392,11 @@ git push origin master
 
 ![](images/18.png)
 
-37. Go back to CodeStar Project dasboard and click EndPoint link to access WebAPP.
+37. Go back to CodeStar Project dasboard and click EndPoint link to access WebAPP. Ensure to modify the endpoint to perform Rest API call.
 
-38. Go to x-ray console. 
+https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75 
+
+38. Go to X-Ray console and observer Service Map and Traces.
 
 36. Congratulations, you have completed the lab.
 
