@@ -236,6 +236,7 @@ should return the following:
 ```
 git config --global user.email you@example.com
 git config --global user.name "Your Name"
+git config credential.helper store
 ```
 
 24. We are going to add all our pending changes, commit it to Git and push it to our AWS CodeCommit Repository:
@@ -344,7 +345,65 @@ git push origin master
 
 33.	Wait for our Continuous Deployment pipeline to complete, and test it from our live endpoint that looks similar to: https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75  
 
-34. Congratulations, you have completed the lab.
+## Adding AWS X-Ray to your Lambda Function
+
+34.	Go to project dashboard and click Project on the left menu. We need to add X-Ray permission to the lambda execution policy. Click CodeStarWorker-serverless-lab-Lambda role and add the following x-ray FullAccess to the policy.
+
+```
+        {
+            "Sid": "2",
+            "Effect": "Allow",
+            "Action": [
+                "apigateway:GET",
+                "logs:DescribeLogGroups",
+                "xray:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
+```
+![](images/16.png) 
+
+35.	Enable AWS X-Ray for your Lambda function by updating template.yml with Properties, Tracing: Active. Save and commit the changes.
+
+```
+  AddService:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: add.handler
+      Runtime: nodejs6.10
+      Tracing: Active
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /path/{x}/{y}
+            Method: any
+```            
+
+36.	Go to the Project Dashboard and observe the project as it goes through CodePipeline. Once completed, go to the Lambda Function and observe that Tracing is enabled. 
+
+![](images/17.png) 
+
+37.	Go to the API Gateway console to enable X-Ray Tracing. Select API Gateway for this project then select Stage. For both Prod and Staging, enable X-Ray Tracing.
+
+![](images/18.png)
+
+38. Go back to CodeStar Project dasboard and click EndPoint link to access WebAPP. Ensure to modify the endpoint to perform Rest API call.
+
+https://xxxx.execute-api.us-east-1.amazonaws.com/Prod/add/25/75 
+
+39. Go to X-Ray console and observer Service Map and Traces.
+
+![](images/19.png)
+
+![](images/20.png)
+
+40. Congratulations, you have completed the lab.
 
 <a name="cleanup"></a>
 # 7. Clean up
