@@ -236,7 +236,6 @@ should return the following:
 ```
 git config --global user.email you@example.com
 git config --global user.name "Your Name"
-git config credential.helper store
 ```
 
 24. We are going to add all our pending changes, commit it to Git and push it to our AWS CodeCommit Repository:
