@@ -166,8 +166,8 @@ Incorporate these **requirements** by modifying the `template.yml` file:
 
 * Function name: `AddService`
 * The functionality will be handled by the `handler()` function in `add.js`
-* Runtime: `nodejs6.10`
-* Use the same `LambdaTrustRole`
+* Runtime: `nodejs8.10`
+* Use the same `LambdaExecutionRole`
 * The event trigger will be coming from our existing `GetEvent` API Gateway
 * We would like to return a JSON response whenever we receive an `ANY` HTTP request to the API with path `/add/{x}/{y}`. Therefore, given `http://[api-address]/add/1/2`, the API should return `{ … "result":3 … }`.  
 
@@ -180,10 +180,11 @@ AddService:
   Type: AWS::Serverless::Function
   Properties:
     Handler: filename.handler-function
-    Runtime: nodejs6.10
+    Runtime: nodejs8.10
     Role:
-      Fn::ImportValue:
-        !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Fn::GetAtt:
+      - LambdaExecutionRole
+      - Arn
     Events:
       GetEvent:
         Type: Api
@@ -372,11 +373,12 @@ git push origin master
     Type: AWS::Serverless::Function
     Properties:
       Handler: add.handler
-      Runtime: nodejs6.10
+      Runtime: nodejs8.10
       Tracing: Active
       Role:
-        Fn::ImportValue:
-          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+        Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
       Events:
         GetEvent:
           Type: Api
